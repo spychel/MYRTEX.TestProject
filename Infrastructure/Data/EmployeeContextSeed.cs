@@ -35,11 +35,13 @@ namespace Infrastructure.Data
                     var salariesData = File.ReadAllText("../Infrastructure/Data/SeedData/salaries.json");
                     var salaries = JsonSerializer.Deserialize<List<Salary>>(salariesData);
 
-                    foreach (var employee in employees)
+                    for( int i = 0; i < employees.Count; i++)
                     {
-                        employee.Salary = salaries.Where(s => s.Id == employee.Id).First();
+                        var employee = employees[i];
+                        employee.Salary = salaries[i];
                         context.Employees.Add(employee);
                     }
+
                     await context.SaveChangesAsync();
                 }
             }

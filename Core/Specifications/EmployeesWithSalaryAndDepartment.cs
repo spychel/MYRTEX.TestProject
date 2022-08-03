@@ -12,8 +12,8 @@ namespace Core.Specifications
                         || x.SecondName.ToLower().Contains(empParams.Name))
                     && (string.IsNullOrEmpty(empParams.Department) || x.Department.Name.ToLower().Contains(empParams.Department))
                     && (string.IsNullOrEmpty(empParams.Salary) || x.Salary.Value.ToString().StartsWith(empParams.Salary))
-                    && (!empParams.Birthdate.HasValue || x.Birthdate.Date == empParams.Birthdate.Value.Date)
-                    && (!empParams.Hiredate.HasValue || x.Hiredate.Date == empParams.Hiredate.Value.Date)
+                    && ( !(empParams.Birthdate != DateTime.MinValue) || x.Birthdate.Date == empParams.Birthdate.Date)
+                    && (!( empParams.Hiredate != DateTime.MinValue) || x.Hiredate.Date == empParams.Hiredate.Date)
                 )
         {
             AddInclude(x => x.Salary);
